@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { AdoptionMySuffix } from './adoption-my-suffix.model';
 import { AdoptionMySuffixPopupService } from './adoption-my-suffix-popup.service';
 import { AdoptionMySuffixService } from './adoption-my-suffix.service';
-import {AnimalMySuffixService} from '../animal/animal-my-suffix.service';
 
 @Component({
     selector: 'jhi-adoption-my-suffix-delete-dialog',
@@ -19,7 +18,6 @@ export class AdoptionMySuffixDeleteDialogComponent {
 
     constructor(
         private adoptionService: AdoptionMySuffixService,
-        private animalService: AnimalMySuffixService,
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager,
         private router: Router
@@ -31,7 +29,7 @@ export class AdoptionMySuffixDeleteDialogComponent {
     }
 
     confirmDelete(id: number) {
-        this.adoptionService.delete(id).subscribe((response) => {
+        this.adoptionService.delete(id).subscribe(() => {
              this.eventManager.broadcast({
                  name: 'adoptionListModification',
                  content: 'Deleted an adoption'
