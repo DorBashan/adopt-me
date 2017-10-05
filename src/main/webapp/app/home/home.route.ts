@@ -11,6 +11,6 @@ export const HOME_ROUTE: Route = {
     },
     data: {
         authorities: [],
-        pageTitle: 'Welcome, Java Hipster!'
+        pageTitle: 'AdoptMe'
     }
 };
