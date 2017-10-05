@@ -1,0 +1,15 @@
+<jhi-alert></jhi-alert>
+
+<div class="h2">
+    <h1 class="display-4 text-center">My Adoptions 🙈</h1>
+    <p class="lead text-center">Animals I'm Giving for Adoption.</p>
+    <button type="button" class="btn btn-success pull-right"
+            [routerLink]="['/', { outlets: { popup: ['animal-my-suffix-new'] } }]">
+        <i class="fa fa-plus fa-lg"></i>
+        <i class="fa fa-paw fa-lg"></i>
+    </button>
+</div>
+
+<br>
+
+<jhi-adoptions-thumbnails [adoptions]="adoptions"></jhi-adoptions-thumbnails>

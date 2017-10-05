@@ -1,0 +1,33 @@
+
+<div *ngIf="adoption">
+    <h2><span>Adoption</span> {{adoption.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Giver</span></dt>
+        <dd>
+            <div *ngIf="adoption.giverId">
+                <a [routerLink]="['/adopt-me-user-my-suffix', adoption.giverId]">{{adoption.giverId}}</a>
+            </div>
+        </dd>
+        <dt><span>Animal</span></dt>
+        <dd>
+            <div *ngIf="adoption.animalId">
+                <a [routerLink]="['/animal-my-suffix', adoption.animalId]">{{adoption.animalId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'adoption-my-suffix/'+ adoption.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

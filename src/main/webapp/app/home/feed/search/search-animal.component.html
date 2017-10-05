@@ -1,0 +1,58 @@
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="input-group col-md-12">
+            <input class=" search-query form-control" placeholder="Search By Description" [(ngModel)]="searchModel.description"/>
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button"
+                        (click)="clickSearch()"> <i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-item form-item-node-type form-type-select form-group">
+            <select class="form-control form-select ajax-processed" [(ngModel)]="searchModel.type">
+                <option>{{searchModel.DEFAULT_ANIMAL_TYPE()}}</option>
+                <option value="DOG">DOG</option>
+                <option value="CAT">CAT</option>
+                <option value="FISH">FISH</option>
+                <option value="HAMSTER">HAMSTER</option>
+                <option value="PARROT">PARROT</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-item form-item-node-type form-type-select form-group">
+            <select class="form-control form-select ajax-processed" [(ngModel)]="searchModel.size">
+                <option>{{searchModel.DEFAULT_ANIMAL_SIZE()}}</option>
+                <option value="SMALL">SMALL</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="BIG">BIG</option>
+                <option value="HUGE">HUGE</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-item form-item-node-type form-type-select form-group">
+            <select class="form-control form-select ajax-processed" [(ngModel)]="searchModel.color">
+                <option>{{searchModel.DEFAULT_ANIMAL_COLOR()}}</option>
+                <option value="BROWN">BROWN</option>
+                <option value="BLACK">BLACK</option>
+                <option value="GINGER">GINGER</option>
+                <option value="WHITE">WHITE</option>
+                <option value="GREY">GREY</option>
+                <option value="GREEN">GREEN</option>
+                <option value="COLORFUL">COLORFUL</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-item form-item-node-type form-type-select form-group">
+            <select class="form-control form-select ajax-processed" [(ngModel)]="searchModel.gender">
+                <option>{{searchModel.DEFAULT_ANIMAL_GENDER()}}</option>
+                <option value="MALE">MALE</option>
+                <option value="FEMALE">FEMALE</option>
+            </select>
+        </div>
+    </div>
+</div>

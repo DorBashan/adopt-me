@@ -1,0 +1,116 @@
+<jhi-alert></jhi-alert>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center ">
+            <div class="panel panel-default">
+                <div class="userprofile social">
+                    <div class="userpic"> <img [src]="animal?.image"
+                                               class="userpicimg"
+                                               onError="this.src='http://placehold.it/350x250';">
+                    </div>
+                    <div class="socials tex-center username">
+                            <a href="mailto:{{giver?.email}}">
+                                <i class="fa fa-envelope" style="color: white"></i>
+                            </a>
+                    </div>
+                </div>
+                <div class="col-md-12 border-top border-bottom">
+                    <ul class="nav nav-pills pull-left countlist"
+                        style="cursor: default" role="tablist">
+                        <li role="presentation">
+                            <h3>
+                                {{animal?.animalName}}
+                                <span  *ngIf="animal?.shortDescription">
+                                    ~ <q class="font-italic">{{animal?.shortDescription}}</q>
+                                </span>
+
+                                <br>
+                                <small>{{animal?.animalType}}
+                                </small>
+                            </h3>
+                        </li>
+                    </ul>
+
+                    <div class="btn-group editbtn" role="group">
+                        <button class="btn btn-info" (click)="isCurrentUserLikedIt() ? dislike() : like()">
+                            <i ngClass="{{isCurrentUserLikedIt() ? 'fa fa-thumbs-up' : 'fa fa-thumbs-o-up'}}"
+                                  style="color: white;">
+                            </i>
+                            {{likesCount}}
+                        </button>
+                        <button *ngIf="account?.id == giver?.id"
+                                class="btn btn-primary"
+                                replaceUrl="true"
+                                [routerLink]="['/', { outlets: { popup: 'animal-my-suffix/'+ animal?.id + '/edit'} }]">
+                            <i class="fa fa-pencil fa-lg"></i>
+                        </button>
+                        <button *ngIf="account?.id == giver?.id"
+                                class="btn btn-danger"
+                                replaceUrl="true"
+                                [routerLink]="['/', { outlets: { popup: 'adoption-my-suffix/'+ adoption?.id + '/delete'} }]">
+                            <i class="fa fa-remove fa-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- /.col-md-12 -->
+        <!--details-->
+        <div class="col-md-4 col-sm-12 pull-right">
+            <div class="panel panel-default">
+                <div class="media-body" style="padding: 10px">
+
+                    <h5><i class="fa fa-home"></i> Owner</h5>
+                    <p>{{giver?.firstName}}  {{giver?.lastName}}</p>
+                    <p *ngIf="giver?.location">Location: {{giver?.location}}</p>
+                    <p *ngIf="giver?.phone">Phone: {{giver?.phone}}</p>
+                    <hr>
+
+                    <div *ngIf="animal?.longDescription">
+                        <h5>Full Description</h5>
+                        <p>{{animal?.longDescription}}</p>
+                        <hr>
+                    </div>
+                    <div *ngIf="animal?.animalGender">
+                        <h5>Gender</h5>
+                        <p>{{animal?.animalGender}}</p>
+                        <hr>
+                    </div>
+                    <div *ngIf="animal?.animalColor">
+                        <h5>Color</h5>
+                        <p>{{animal?.animalColor}}</p>
+                        <hr>
+                    </div>
+                    <div *ngIf="animal?.animalSize">
+                        <h5>Size</h5>
+                        <p>{{animal?.animalSize}}</p>
+                        <hr>
+                    </div>
+                    <div *ngIf="animal?.birthDate">
+                        <h5>Age</h5>
+                        <p>{{getAge(animal?.birthDate)}}</p>
+                        <hr>
+                    </div>
+                    <div>
+                        <h5>Trained</h5>
+                        <p *ngIf="animal?.isTrained">Yes</p>
+                        <p *ngIf="!animal?.isTrained">No</p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-12 pull-left posttimeline">
+            <jhi-adoption-comments [adoptionId]="adoption.id"></jhi-adoption-comments>
+        </div>
+    </div>
+</div>
+
+<button type="submit"
+        (click)="previousState()"
+        class="btn btn-info">
+    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+</button>

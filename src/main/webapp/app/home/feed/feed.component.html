@@ -1,0 +1,76 @@
+<h1 class="display-4 text-center">AdoptMe Animals Feed 🐬</h1>
+<p class="lead text-center">Find your Next Best Friend Here.</p>
+<hr>
+
+<jhi-search-animal (search)='onSearch($event)'></jhi-search-animal>
+
+<br>
+
+<div class="container">
+    <div *ngIf="adoptions?.length == 0">
+        <p class="lead text-center">404 - No Animals... 😥</p>
+    </div>
+
+    <div class="row">
+        <div *ngFor="let adoption of adoptions" class="col-md-4" style="padding-right: 20px">
+            <div class="card kl-card kl-xl kl-shine kl-show">
+                <div class="card-block" style="background-color: whitesmoke; height: 160px">
+                    <span class="h4">
+                        <a [routerLink]="['../animal-my-suffix/' + adoption?.id ]">
+                        <b>{{adoption?.animal?.animalName}}</b></a><span class="h6">
+                        ~ {{adoption?.animal?.shortDescription}}</span>
+                    </span>
+
+                    <hr>
+                    <div>
+                        <div *ngIf="adoption?.animal?.animalType"
+                             class=" badge badge-success">{{adoption?.animal?.animalType}}</div>
+                        <div *ngIf="adoption?.animal?.animalSize"
+                             class=" badge badge-warning">{{adoption?.animal?.animalSize}}</div>
+                        <div *ngIf="adoption?.animal?.animalColor"
+                             class=" badge badge-default">{{adoption?.animal?.animalColor}}</div>
+                        <div *ngIf="adoption?.animal?.animalGender"
+                             class=" badge badge-info">{{adoption?.animal?.animalGender}}</div>
+                    </div>
+                </div>
+                <div class="kl-card-block kl-xl bg-primary kl-shadow-b kl-overlay kl-slide-in kl-show">
+                    <div class="kl-card-overlay kl-card-overlay-split-q kl-dark kl-inverse">
+                        <div class="kl-card-overlay-item"></div>
+                        <div class="kl-card-overlay-item"></div>
+                        <div class="kl-card-overlay-item">
+                            <div class="kl-figure-block">
+                                <span class="kl-figure kl-txt-shadow">{{adoption?.commentsCount}}</span>
+                                <span class="kl-title">Comments</i></span>
+                            </div>
+                        </div>
+                        <div class="kl-card-overlay-item">
+                            <div class="kl-figure-block">
+                                <span class="kl-figure">{{adoption?.likesCount}}</span>
+                                <span class="kl-title">Likes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a [routerLink]="['../animal-my-suffix/' + adoption?.id ]"
+                       class="kl-card-avatar kl-xl kl-pm">
+                        <img class="kl-b-danger kl-b-circle kl-b-5 kl-slow kl-shadow-br kl-reveal"
+                             [src]="adoption?.animal?.image"
+                             onError="this.src='http://placehold.it/350x250';">
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div><!--/row-->
+</div><!--/container -->
+
+<br>
+<div class="container">
+    <div class="text-center center-block">
+        <button *ngIf="adoptions?.length != totalItems" class="btn btn-primary"
+                (click)="loadMore()">
+            <i class="fa fa-chevron-circle-down"></i>
+            Show more...
+        </button>
+    </div>
+</div>

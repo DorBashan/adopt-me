@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Comments.
+    -->
+    <changeSet id="20170804181815-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="comments"
+                                 constraintName="fk_comments_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="adopt_me_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="adoption_id"
+                                 baseTableName="comments"
+                                 constraintName="fk_comments_adoption_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="adoption"/>
+
+    </changeSet>
+</databaseChangeLog>

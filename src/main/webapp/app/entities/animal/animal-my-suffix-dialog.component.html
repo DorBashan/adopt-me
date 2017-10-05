@@ -1,0 +1,117 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAnimalLabel">Create or edit your Animal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label class="form-control-label" for="field_animalName">Animal Name</label>
+            <input type="text" class="form-control" name="animalName" id="field_animalName"
+                [(ngModel)]="animal.animalName" placeholder="Name of the animal you're giving"
+                   required />
+            <div [hidden]="!(editForm.controls.animalName?.dirty && editForm.controls.animalName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.animalName?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_shortDescription">
+                Short Description (maximum 60 characters)
+            </label>
+            <input type="text" class="form-control" name="shortDescription" id="field_shortDescription"
+                   [(ngModel)]="animal.shortDescription" required maxlength="60"
+                   placeholder="{{ getShortDescriptionPlaceHolder() }}"/>
+            <div [hidden]="!(editForm.controls.shortDescription?.dirty && editForm.controls.shortDescription?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.shortDescription?.errors?.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_animalType">Animal Type</label>
+            <select class="form-control" name="animalType" [(ngModel)]="animal.animalType" id="field_animalType"
+                    required>
+                <option value="DOG">DOG</option>
+                <option value="CAT">CAT</option>
+                <option value="FISH">FISH</option>
+                <option value="HAMSTER">HAMSTER</option>
+                <option value="PARROT">PARROT</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_animalGender">Animal Gender</label>
+            <select class="form-control" name="animalGender" [(ngModel)]="animal.animalGender" id="field_animalGender"
+            required>
+                <option value="MALE">MALE</option>
+                <option value="FEMALE">FEMALE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_animalColor">Animal Color</label>
+            <select class="form-control" name="animalColor" [(ngModel)]="animal.animalColor" id="field_animalColor" >
+                <option value="BROWN">BROWN</option>
+                <option value="BLACK">BLACK</option>
+                <option value="GINGER">GINGER</option>
+                <option value="WHITE">WHITE</option>
+                <option value="GREY">GREY</option>
+                <option value="GREEN">GREEN</option>
+                <option value="COLORFUL">COLORFUL</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_animalSize">Animal Size</label>
+            <select class="form-control" name="animalSize" [(ngModel)]="animal.animalSize" id="field_animalSize" >
+                <option value="HUGE">HUGE</option>
+                <option value="BIG">BIG</option>
+                <option value="HUGE">MEDIUM</option>
+                <option value="SMALL">SMALL</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_birthDate">Birth Date</label>
+            <div class="d-flex">
+                <input id="field_birthDate" type="date" class="form-control" name="birthDate"
+                       [value]="animal.birthDate | date:'yyyy-MM-dd'" (input)="animal.birthDate = parseDate($event.target.value)"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_longDescription">Long Description</label>
+            <textarea rows="5" type="text" class="form-control" name="longDescription" id="field_longDescription"
+                [(ngModel)]="animal.longDescription"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_isTrained">Is Trained</label>
+            <input type="checkbox" class="form-control" name="isTrained" id="field_isTrained"
+                [(ngModel)]="animal.isTrained"  />
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="files" [className]="imageLabelClassName">Select Animal Image</label>
+                <input type="file" id="files" style="visibility:hidden;" (change)="fileChanged($event)"
+                       accept="image/*">
+            </div>
+
+            <button type="button" class="btn btn-default"
+                    [disabled]="animal.id != undefined" style="margin-right: 5px" (click)="clearImage()">
+                <span class="fa fa-trash"></span>&nbsp;<span>Clear</span>
+            </button>
+            <div *ngIf="file != null">{{file?.name}}</div>
+            <div *ngIf="file == null">{{animal?.imageUrl}}</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || (file == null && animal.imageUrl == undefined)
+         || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,74 @@
+<div>
+    <h2>
+        <span>Animals</span>
+        <button class="btn btn-primary float-right jh-create-entity create-animal-my-suffix" [routerLink]="['/', { outlets: { popup: ['animal-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Animal
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="animals">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Animal Name</span></th>
+            <th><span>Animal Type</span></th>
+            <th><span>Animal Color</span></th>
+            <th><span>Animal Size</span></th>
+            <th><span>Image Url</span></th>
+            <th><span>Birth Date</span></th>
+            <th><span>Short Description</span></th>
+            <th><span>Long Description</span></th>
+            <th><span>Is Trained</span></th>
+            <th><span>Animal Gender</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let animal of animals ;trackBy: trackId">
+                <td><a [routerLink]="['../animal-my-suffix', animal.id ]">{{animal.id}}</a></td>
+                <td>{{animal.animalName}}</td>
+                <td>{{animal.animalType}}</td>
+                <td>{{animal.animalColor}}</td>
+                <td>{{animal.animalSize}}</td>
+                <td>{{animal.imageUrl}}</td>
+                <td>{{animal.birthDate | date:'medium'}}</td>
+                <td>{{animal.shortDescription}}</td>
+                <td>{{animal.longDescription}}</td>
+                <td>{{animal.isTrained}}</td>
+                <td>{{animal.animalGender}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../animal-my-suffix', animal.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'animal-my-suffix/'+ animal.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'animal-my-suffix/'+ animal.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

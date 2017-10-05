@@ -1,0 +1,59 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "animalName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "animalType",
+            "fieldType": "AnimalType",
+            "fieldValues": "DOG,CAT,FISH,HAMSTER,PARROT"
+        },
+        {
+            "fieldName": "animalColor",
+            "fieldType": "AnimalColor",
+            "fieldValues": "BROWN,BLACK,GINGER,COLORFUL,GREEN,WHITE,GREY"
+        },
+        {
+            "fieldName": "animalSize",
+            "fieldType": "AnimalSize",
+            "fieldValues": "HUGE,BIG,MEDIUM,SMALL"
+        },
+        {
+            "fieldName": "imageUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "birthDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "shortDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isTrained",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "animalGender",
+            "fieldType": "AnimalGender",
+            "fieldValues": "MALE,FEMALE"
+        }
+    ],
+    "changelogDate": "20170804181811",
+    "entityTableName": "animal",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuffix"
+}
