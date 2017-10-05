@@ -2,19 +2,14 @@ package bashan.adoptme.web.rest;
 
 import bashan.adoptme.domain.Adoption;
 import bashan.adoptme.domain.Animal;
-import bashan.adoptme.domain.User;
-import bashan.adoptme.repository.AdoptMeUserRepository;
 import bashan.adoptme.repository.AdoptionRepository;
 import bashan.adoptme.repository.AnimalRepository;
-import bashan.adoptme.repository.UserRepository;
 import bashan.adoptme.security.SecurityUtils;
 import bashan.adoptme.service.AdoptMeUserService;
-import com.codahale.metrics.annotation.Timed;
 import bashan.adoptme.service.AnimalService;
-import bashan.adoptme.web.rest.util.HeaderUtil;
 import bashan.adoptme.service.dto.AnimalDTO;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import bashan.adoptme.web.rest.util.HeaderUtil;
+import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +23,6 @@ import javax.validation.Valid;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -179,5 +173,15 @@ public class AnimalResource {
         String fileUrl = fileResource.uploadFileToDirectory(file , imagesPath);
 
         return ResponseEntity.ok(fileUrl);
+    }
+
+    @DeleteMapping("/animal/{id}/image")
+    @Timed
+    public void deleteAnimalProfileImage(@PathVariable Long id)
+    {
+        log.debug("REST request to delete a file of : {}", id);
+
+        fileResource.deleteFileFromDirectory(request.getServletContext().getRealPath(imagesPath)
+            + File.separator + animalService.findOne(id).getImageUrl());
     }
 }

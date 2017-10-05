@@ -32,6 +32,14 @@ public class FileResource
         return uniqueFileName;
     }
 
+    public void deleteFileFromDirectory(String path)
+    {
+        File file = new File(path);
+        if (!file.delete()) {
+            log.error("could not delete image at path: " + path);
+        }
+    }
+
     private String generateUniqueFileName(MultipartFile file)
     {
         return String.valueOf(new Date().getTime()) + "_" + file.getOriginalFilename();

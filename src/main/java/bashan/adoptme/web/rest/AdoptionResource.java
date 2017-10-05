@@ -43,9 +43,12 @@ public class AdoptionResource {
 
     private final AdoptMeUserService adoptMeUserService;
 
-    public AdoptionResource(AdoptionService adoptionService, AdoptMeUserService adoptMeUserService) {
+    private final AnimalResource animalResource;
+
+    public AdoptionResource(AdoptionService adoptionService, AdoptMeUserService adoptMeUserService, AnimalResource animalResource) {
         this.adoptionService = adoptionService;
         this.adoptMeUserService = adoptMeUserService;
+        this.animalResource = animalResource;
     }
 
     /**
@@ -164,6 +167,7 @@ public class AdoptionResource {
     @Timed
     public ResponseEntity<Void> deleteAdoption(@PathVariable Long id) {
         log.debug("REST request to delete Adoption : {}", id);
+        animalResource.deleteAnimalProfileImage(adoptionService.findOne(id).getAnimalId());
         adoptionService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createAnimalDeletionAlert()).build();
     }
