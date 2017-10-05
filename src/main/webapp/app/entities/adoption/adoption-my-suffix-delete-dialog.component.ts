@@ -7,6 +7,7 @@ import { JhiEventManager } from 'ng-jhipster';
 import { AdoptionMySuffix } from './adoption-my-suffix.model';
 import { AdoptionMySuffixPopupService } from './adoption-my-suffix-popup.service';
 import { AdoptionMySuffixService } from './adoption-my-suffix.service';
+import {AnimalMySuffixService} from '../animal/animal-my-suffix.service';
 
 @Component({
     selector: 'jhi-adoption-my-suffix-delete-dialog',
@@ -18,6 +19,7 @@ export class AdoptionMySuffixDeleteDialogComponent {
 
     constructor(
         private adoptionService: AdoptionMySuffixService,
+        private animalService: AnimalMySuffixService,
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager,
         private router: Router
@@ -30,14 +32,14 @@ export class AdoptionMySuffixDeleteDialogComponent {
 
     confirmDelete(id: number) {
         this.adoptionService.delete(id).subscribe((response) => {
-            this.eventManager.broadcast({
-                name: 'adoptionListModification',
-                content: 'Deleted an adoption'
-            });
-            this.activeModal.dismiss(true);
+             this.eventManager.broadcast({
+                 name: 'adoptionListModification',
+                 content: 'Deleted an adoption'
+             });
+            this.router.navigate(['my-adoptions']);
         });
 
-        this.router.navigate(['my-adoptions']);
+        this.activeModal.dismiss(true);
     }
 }
 
