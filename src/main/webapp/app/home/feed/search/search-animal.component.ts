@@ -11,11 +11,16 @@ import {SearchModel} from './search.model';
 export class SearchAnimalComponent implements OnInit {
     searchModel: SearchModel = new SearchModel();
     @Output() search: EventEmitter<SearchModel> = new EventEmitter<SearchModel>();
+    public isShowExpandSearchPanel = false;
 
     constructor() {
     }
 
     ngOnInit() {
+    }
+
+    cleanSearch() {
+        this.searchModel = new SearchModel();
     }
 
     clickSearch() {
