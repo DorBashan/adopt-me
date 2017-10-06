@@ -56,6 +56,13 @@ public class AdoptMeUserServiceImpl implements AdoptMeUserService{
         return adoptMeUserMapper.toDto(adoptMeUser);
     }
 
+    @Override
+    public AdoptMeUserDTO save(AdoptMeUser adoptMeUser)
+    {
+        AdoptMeUser adoptMeUserAfterSave = adoptMeUserRepository.save(adoptMeUser);
+        return adoptMeUserMapper.toDto(adoptMeUserAfterSave);
+    }
+
     /**
      *  Get all the adoptMeUsers.
      *

@@ -22,6 +22,8 @@ public interface AdoptMeUserService {
      */
     AdoptMeUserDTO save(AdoptMeUserDTO adoptMeUserDTO);
 
+    AdoptMeUserDTO save (AdoptMeUser adoptMeUser);
+
     /**
      *  Get all the adoptMeUsers.
      *

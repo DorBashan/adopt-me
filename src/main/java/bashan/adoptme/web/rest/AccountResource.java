@@ -1,20 +1,16 @@
 package bashan.adoptme.web.rest;
 
-import bashan.adoptme.service.AdoptMeUserService;
-import bashan.adoptme.service.dto.AdoptMeUserDTO;
-import bashan.adoptme.service.mapper.AdoptMeUserMapper;
-import com.codahale.metrics.annotation.Timed;
-
 import bashan.adoptme.domain.User;
 import bashan.adoptme.repository.UserRepository;
 import bashan.adoptme.security.SecurityUtils;
+import bashan.adoptme.service.AdoptMeUserService;
 import bashan.adoptme.service.MailService;
 import bashan.adoptme.service.UserService;
 import bashan.adoptme.service.dto.UserDTO;
+import bashan.adoptme.web.rest.util.HeaderUtil;
 import bashan.adoptme.web.rest.vm.KeyAndPasswordVM;
 import bashan.adoptme.web.rest.vm.ManagedUserVM;
-import bashan.adoptme.web.rest.util.HeaderUtil;
-
+import com.codahale.metrics.annotation.Timed;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Optional;
 
 /**
  * REST controller for managing the current user's account.
@@ -149,9 +145,13 @@ public class AccountResource {
                 userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
                     userDTO.getLangKey(), userDTO.getImageUrl());
 
-                adoptMeUserService.findByUser(u).map(adoptMeUser ->
-                    adoptMeUserService.save(new AdoptMeUserDTO(adoptMeUser.getId(), userDTO.getLocation(),
-                        userDTO.getPhone())));
+                adoptMeUserService.findByUser(u).map(adoptMeUser -> {
+                    adoptMeUser.setLocation(userDTO.getLocation());
+                    adoptMeUser.setPhone(userDTO.getPhone());
+
+                    return adoptMeUserService.save(adoptMeUser);
+
+                    });
 
                 return new ResponseEntity(HttpStatus.OK);
             })
