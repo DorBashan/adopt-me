@@ -107,7 +107,16 @@ public class AnimalResource {
         if (animalDTO.getId() == null) {
             return createAnimal(animalDTO);
         }
+
+        String imagePathBeforeUpdate = animalService.findOne(animalDTO.getId()).getImageUrl();
+
         AnimalDTO result = animalService.save(animalDTO);
+
+        if (!imagePathBeforeUpdate.equals(result.getImageUrl())) {
+            fileResource.deleteFileFromDirectory(request.getServletContext().getRealPath(imagesPath)
+                + File.separator + imagePathBeforeUpdate);
+        }
+
         return ResponseEntity.ok()
             .headers(HeaderUtil.createAnimalUpdateAlert(animalDTO.getAnimalName()))
             .body(result);
