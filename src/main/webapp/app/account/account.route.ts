@@ -1,10 +1,7 @@
 import { Routes } from '@angular/router';
-
 import {
     activateRoute,
     passwordRoute,
-    passwordResetFinishRoute,
-    passwordResetInitRoute,
     registerRoute,
     settingsRoute
 } from './';
@@ -14,8 +11,6 @@ import {myFavoritesRoute} from './my-favorites/my-favorites.route';
 const ACCOUNT_ROUTES = [
     activateRoute,
     passwordRoute,
-    passwordResetFinishRoute,
-    passwordResetInitRoute,
     registerRoute,
     settingsRoute,
     myAdoptionsRoute,
